@@ -2,5 +2,6 @@
 	"tabWidth": 2,
 	"useTabs": true,
 	"jsxSingleQuote": true,
-	"jsxBracketSameLine": true
+	"jsxBracketSameLine": true,
+	"singleQuote": true
 }
