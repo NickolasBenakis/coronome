@@ -10,14 +10,23 @@ export const initialState = {
 	currentCity: {
 		lat: 37.98,
 		lng: 23.72
-	}
+	},
+	currentCityName: '',
+	currentZoom: 11,
+	isAffected: false
 };
 
 export function reducer(state, action) {
 	switch (action.type) {
 		case 'CHANGE_LOCATION':
 			if (action.payload && Object.values(action.payload).length) {
-				return { ...state, currentPinCoords: action.payload };
+				return {
+					...state,
+					currentPinCoords: action.payload,
+					currentZoom: 13,
+					currentCity: action.payload,
+					isAffected: true
+				};
 			}
 			return state;
 		case 'FILTER_CITY':
@@ -25,14 +34,18 @@ export function reducer(state, action) {
 				const filteredCities = state.cities.filter((city, index, self) =>
 					city.city.toLowerCase().includes(action.payload.toLowerCase())
 				);
-				return { ...state, filteredCities: filteredCities };
+				return { ...state, filteredCities: filteredCities, currentZoom: 11 };
 			} else {
-				return { ...state, filteredCities: state.cities };
+				return { ...state, filteredCities: state.cities, currentZoom: 11 };
 			}
 		case 'RESET_CITY':
 			return { ...state, filteredCities: state.cities };
 		case 'NAVIGATE_TO_CITY':
-			return { ...state, currentCity: action.payload };
+			return {
+				...state,
+				currentCity: action.payload.cityCoords,
+				currentCityName: action.payload.name
+			};
 		default:
 			return state;
 	}

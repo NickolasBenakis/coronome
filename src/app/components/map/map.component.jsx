@@ -14,6 +14,7 @@ function SimpleMap({ center, zoom }) {
 				defaultCenter={center}
 				defaultZoom={zoom}
 				center={state.currentCity}
+				zoom={state.currentZoom}
 				yesIWantToUseGoogleMapApiInternals>
 				<Pin
 					lat={state.currentPinCoords.lat || null}

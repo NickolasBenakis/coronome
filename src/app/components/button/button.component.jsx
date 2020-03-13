@@ -15,6 +15,7 @@ const Button = () => {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
+			console.log(currentCoords);
 			dispatch({
 				type: 'CHANGE_LOCATION',
 				payload: currentCoords
@@ -23,9 +24,18 @@ const Button = () => {
 	};
 	return (
 		<Fragment>
-			<button className='btn btn-warning m-2' onClick={handler}>
-				I am infected
-			</button>
+			{state.isAffected ? (
+				<div className='alert alert-info w-50 m-auto' role='alert'>
+					Thank you!
+				</div>
+			) : (
+				<button
+					className='btn btn-warning m-2'
+					onClick={handler}
+					disabled={state.isAffected}>
+					I am infected
+				</button>
+			)}
 		</Fragment>
 	);
 };
