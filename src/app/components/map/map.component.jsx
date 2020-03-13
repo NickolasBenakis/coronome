@@ -13,6 +13,7 @@ function SimpleMap({ center, zoom }) {
 				bootstrapURLKeys={{ key: API_KEY }}
 				defaultCenter={center}
 				defaultZoom={zoom}
+				center={state.currentCity}
 				yesIWantToUseGoogleMapApiInternals>
 				<Pin
 					lat={state.currentPinCoords.lat || null}

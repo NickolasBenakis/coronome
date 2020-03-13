@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: center;
 
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 630px) {
         flex-direction: column;
     }
 }
@@ -13,7 +13,12 @@
     height: 80vh;
     margin: 20px auto;
 
-    @media screen and (max-width: 576px) {
+    @media screen and (max-width: 630px) {
         height: unset;
     }
+}
+
+.cities-section {
+    height: 80vh;
+    margin: 20px auto;
 }

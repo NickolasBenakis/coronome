@@ -11,7 +11,13 @@ const FilterCity = () => {
 	};
 	return (
 		<Fragment>
-			<input type='search' onChange={filterCityHandler} />
+			<div className='input-group mt-2 mb-2'>
+				<input
+					type='text'
+					className='form-control'
+					onChange={filterCityHandler}
+				/>
+			</div>
 		</Fragment>
 	);
 };

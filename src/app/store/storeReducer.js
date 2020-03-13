@@ -6,7 +6,11 @@ export const initialState = {
 		lng: null
 	},
 	cities: CITIES,
-	filteredCities: CITIES
+	filteredCities: CITIES,
+	currentCity: {
+		lat: 37.98,
+		lng: 23.72
+	}
 };
 
 export function reducer(state, action) {
@@ -23,8 +27,12 @@ export function reducer(state, action) {
 				);
 				return { ...state, filteredCities: filteredCities };
 			} else {
-				return state;
+				return { ...state, filteredCities: state.cities };
 			}
+		case 'RESET_CITY':
+			return { ...state, filteredCities: state.cities };
+		case 'NAVIGATE_TO_CITY':
+			return { ...state, currentCity: action.payload };
 		default:
 			return state;
 	}
