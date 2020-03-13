@@ -4,8 +4,23 @@ const Button = () => {
 	const { state, dispatch } = React.useContext(Store);
 
 	const handler = () => {
+		dispatch({
+			type: 'LOADER',
+			payload: true
+		});
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition);
+			navigator.geolocation.getCurrentPosition(
+				success => {
+					dispatch({
+						type: 'LOADER',
+						payload: false
+					});
+					showPosition(success);
+				},
+				err => {
+					console.log(err);
+				}
+			);
 			console.log(state.currentPinCoords);
 		} else {
 			console.log('Geolocation is not supported by this browser.');

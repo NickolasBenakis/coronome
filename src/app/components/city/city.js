@@ -22,7 +22,7 @@ const City = ({ city }) => {
 		});
 	};
 	const className = classNames('list-group-item', {
-		active: city.city === state.currentCityName
+		// active: city.city === state.currentCityName
 	});
 	return (
 		<Fragment>

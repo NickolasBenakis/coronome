@@ -13,7 +13,8 @@ export const initialState = {
 	},
 	currentCityName: '',
 	currentZoom: 11,
-	isAffected: false
+	isAffected: false,
+	showLoader: false
 };
 
 export function reducer(state, action) {
@@ -46,6 +47,8 @@ export function reducer(state, action) {
 				currentCity: action.payload.cityCoords,
 				currentCityName: action.payload.name
 			};
+		case 'LOADER':
+			return { ...state, showLoader: action.payload };
 		default:
 			return state;
 	}
