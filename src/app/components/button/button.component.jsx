@@ -23,7 +23,7 @@ const Button = () => {
 	};
 	return (
 		<Fragment>
-			<button className='btn btn-warning' onClick={handler}>
+			<button className='btn btn-warning m-2' onClick={handler}>
 				I am infected
 			</button>
 		</Fragment>

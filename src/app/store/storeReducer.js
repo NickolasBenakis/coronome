@@ -1,8 +1,12 @@
+import { CITIES } from '../../api/cities';
+
 export const initialState = {
 	currentPinCoords: {
 		lat: null,
 		lng: null
-	}
+	},
+	cities: CITIES,
+	filteredCities: CITIES
 };
 
 export function reducer(state, action) {
@@ -12,6 +16,15 @@ export function reducer(state, action) {
 				return { ...state, currentPinCoords: action.payload };
 			}
 			return state;
+		case 'FILTER_CITY':
+			if (action.payload) {
+				const filteredCities = state.cities.filter((city, index, self) =>
+					city.city.toLowerCase().includes(action.payload.toLowerCase())
+				);
+				return { ...state, filteredCities: filteredCities };
+			} else {
+				return state;
+			}
 		default:
 			return state;
 	}
