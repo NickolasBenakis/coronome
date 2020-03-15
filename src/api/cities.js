@@ -3585,4 +3585,10 @@ export const CITIES = [
       lng: '23.754249',
       population: ''
     }
-  ]
+  ].map((el,index) => {
+    return {
+      ...el,
+      city: el.city.normalize("NFD").replace(/[\u0300-\u036f]/g, ""),
+      id: index
+    }
+  });

@@ -12,6 +12,7 @@ export const initialState = {
 		lng: 23.72
 	},
 	currentCityName: '',
+	currentInfectedCity: null,
 	currentZoom: 11,
 	isAffected: false,
 	showLoader: false
@@ -20,12 +21,19 @@ export const initialState = {
 export function reducer(state, action) {
 	switch (action.type) {
 		case 'CHANGE_LOCATION':
-			if (action.payload && Object.values(action.payload).length) {
+			if (
+				action.payload.localCoords &&
+				Object.values(action.payload.localCoords).length
+			) {
+				const cityMatch = state.cities.find(city => {
+					return city.city.includes(action.payload.cityName);
+				});
 				return {
 					...state,
-					currentPinCoords: action.payload,
+					currentPinCoords: action.payload.localCoords,
 					currentZoom: 13,
-					currentCity: action.payload,
+					currentCity: action.payload.localCoords,
+					currentCityName: cityMatch.city,
 					isAffected: true
 				};
 			}

@@ -7,11 +7,13 @@ import { Store } from '../../store/StoreContext';
 import classNames from 'classnames';
 function SimpleMap({ center, zoom }) {
 	const { state, dispatch } = React.useContext(Store);
-	const className = classNames('map-container', {
+	const mapContainerClass = classNames('map-container', {
 		overlay: state.showLoader
 	});
+
 	return (
-		<div className={className}>
+		<div className={mapContainerClass}>
+			{/* <span className='loader-logo'></span> */}
 			<GoogleMapReact
 				bootstrapURLKeys={{ key: API_KEY }}
 				defaultCenter={center}
