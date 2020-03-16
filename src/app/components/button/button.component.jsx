@@ -32,6 +32,7 @@ const Button = () => {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
+			console.log(currentCoords);
 			await getCityNameFromLatLng(currentCoords);
 		}
 	};
@@ -47,7 +48,7 @@ const Button = () => {
 				address.results[0].address_components[2].short_name;
 			dispatch({
 				type: 'CHANGE_LOCATION',
-				payload: { localCoords: coords, cityName: cityName }
+				payload: { localCoords: coords, city: cityName || '' }
 			});
 			addInfection(cityName);
 		} catch (error) {
@@ -72,11 +73,22 @@ const Button = () => {
 	const addInfection = cityName => {
 		const db = firebase.firestore();
 		const increment = firebase.firestore.FieldValue.increment(1);
-		const infectedCityQuery = db.collection('infections').where('')
 
-		infectedCityQuery.update({
-			number: increment
-		});
+		function incrementInfection(cityName) {
+			db.collection('infections')
+				.doc(cityName)
+				.set({
+					number: increment
+				});
+		}
+		db.collection('infections')
+			.doc(cityName)
+			.update({ number: increment })
+			.then(success => console.log('number updated'))
+			.catch(err => {
+				console.log('not found, try to set');
+				incrementInfection(cityName);
+			});
 	};
 
 	return (

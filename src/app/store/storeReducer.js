@@ -26,7 +26,9 @@ export function reducer(state, action) {
 				Object.values(action.payload.localCoords).length
 			) {
 				const cityMatch = state.cities.find(city => {
-					return city.city.includes(action.payload.cityName);
+					return city.city
+						.toLowerCase()
+						.includes(action.payload.city.toLowerCase());
 				});
 				return {
 					...state,
